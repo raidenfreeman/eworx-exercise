@@ -1,9 +1,10 @@
-// import { Product } from "../models/products.model";
+import { Product } from "../../shared/models/products.model";
 
-// // --- Product actions----
-// export class LoadProducts {
-//   static readonly type = '[Products] Load Products';
-// }
+// --- Basket actions----
+export class AddProduct {
+  static readonly type = '[Basket] Add Product';
+  constructor(public readonly payload: string) {}
+}
 
 // export class LoadProductsSuccess {
 //   static readonly type = '[Products] Load Products Success';
@@ -15,3 +16,4 @@
 //   static readonly type = '[Products] Load Products Fail';
 //   constructor(public readonly payload?: any) {}
 // }
+

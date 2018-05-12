@@ -4,9 +4,9 @@ import {
   ChangeDetectionStrategy,
   Input
 } from "@angular/core";
-import { Product } from "../../models/products.model";
 import { Store } from "@ngxs/store";
 import { LoadProducts } from "../../store/products.actions";
+import { Product } from "../../../shared/models/products.model";
 
 @Component({
   selector: "app-products",
@@ -24,5 +24,6 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new LoadProducts());
+    console.log('init ProdComponent');
   }
 }

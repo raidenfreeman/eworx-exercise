@@ -2,13 +2,13 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { asapScheduler, of } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 
+import { Product } from "../models/products.model";
 import {
   LoadProducts,
   LoadProductsFail,
   LoadProductsSuccess
-} from "./products.actions";
-import { Product } from "../models/products.model";
-import { ProductsService } from "../services/products.service";
+} from "../../products/store/products.actions";
+import { ProductsService } from "../services/products/products.service";
 
 export interface ProductsStateModel {
   products: Product[];
@@ -63,5 +63,4 @@ export class ProductsState {
   loadProductsFail({ patchState }: StateContext<ProductsStateModel>) {
     patchState({ loading: false, loaded: false });
   }
-
 }

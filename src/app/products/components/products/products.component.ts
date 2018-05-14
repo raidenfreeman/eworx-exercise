@@ -4,9 +4,12 @@ import {
   ChangeDetectionStrategy,
   Input
 } from "@angular/core";
-import { Store } from "@ngxs/store";
+import { Store, Select } from "@ngxs/store";
 import { LoadProducts } from "../../store/products.actions";
 import { Product } from "../../../shared/models/products.model";
+import { ProductsState } from "../../../shared/store/products.state";
+import { Observable } from "rxjs";
+import { AddProduct } from "../../../basket/store/basket.actions";
 
 @Component({
   selector: "app-products",
@@ -17,13 +20,13 @@ import { Product } from "../../../shared/models/products.model";
 export class ProductsComponent implements OnInit {
   @Input() products: Product[] = [];
 
+  @Select(ProductsState) products$: Observable<Product[]>;
   addProduct(product: Product) {
-    console.log("added " + product.name);
+    this.store.dispatch(new AddProduct(product.id));
   }
   constructor(private store: Store) {}
 
   ngOnInit() {
     this.store.dispatch(new LoadProducts());
-    console.log('init ProdComponent');
   }
 }

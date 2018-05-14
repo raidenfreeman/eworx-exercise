@@ -10,31 +10,20 @@ import {
 } from "../../products/store/products.actions";
 import { ProductsService } from "../services/products/products.service";
 
-export interface ProductsStateModel {
-  products: Product[];
-  loaded: boolean;
-  loading: boolean;
-}
-
-@State<ProductsStateModel>({
+@State<Product[]>({
   name: "productsState",
-  defaults: {
-    products: [],
-    loaded: false,
-    loading: false
-  }
+  defaults: []
 })
 export class ProductsState {
   constructor(private productsService: ProductsService) {}
 
   @Selector()
-  static products(state: ProductsStateModel): Product[] {
-    return state.products;
+  static products(state: Product[]): Product[] {
+    return state;
   }
   // load Products
   @Action(LoadProducts)
-  loadProducts({ patchState, dispatch }: StateContext<ProductsStateModel>) {
-    patchState({ loading: true });
+  loadProducts({ dispatch }: StateContext<Product[]>) {
     return this.productsService.getProducts().pipe(
       map((Products: Product[]) => {
         asapScheduler.schedule(() =>
@@ -49,18 +38,14 @@ export class ProductsState {
 
   @Action(LoadProductsSuccess)
   loadProductSuccess(
-    { patchState }: StateContext<ProductsStateModel>,
+    { setState }: StateContext<Product[]>,
     action: LoadProductsSuccess
   ) {
-    patchState({
-      products: action.payload,
-      loaded: true,
-      loading: false
-    });
+    setState(action.payload);
   }
 
-  @Action(LoadProductsFail)
-  loadProductsFail({ patchState }: StateContext<ProductsStateModel>) {
-    patchState({ loading: false, loaded: false });
-  }
+  // @Action(LoadProductsFail)
+  // loadProductsFail({ patchState }: StateContext<Product[]>) {
+  //   patchState({ loading: false, loaded: false });
+  // }
 }

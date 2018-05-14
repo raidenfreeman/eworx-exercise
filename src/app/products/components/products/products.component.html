@@ -1,8 +1,8 @@
 <h1>INSANITY!!!!!</h1>
-<!-- <div class="products">
-  <div class="product" *ngFor="let product of products;" (click)="addProduct(product)" >
+<div class="products">
+  <div class="product" *ngFor="let product of products$ | async" (click)="addProduct(product)">
     <img src="/assets/img/toppings/singles/{{ product.imageURL }}">
     <h1>{{ product.name }}</h1>
     <p></p>
   </div>
-</div> -->
+</div>

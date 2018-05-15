@@ -18,8 +18,6 @@ import { AddProduct } from "../../../basket/store/basket.actions";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnInit {
-  @Input() products: Product[] = [];
-
   @Select(ProductsState) products$: Observable<Product[]>;
   addProduct(product: Product) {
     this.store.dispatch(new AddProduct(product.id));

@@ -14,8 +14,10 @@ export class BasketState {
   constructor() {}
 
   @Selector()
-  static products(state: ProductIdQuantityPair): ProductIdQuantityPair {
-    return state;
+  static getProductQuantityPairs(
+    state: ProductIdQuantityPair
+  ): { id: string; quantity: number }[] {
+    return Object.keys(state).map(id => ({ id, quantity: state[id] }));
   }
 
   @Action(AddProduct)

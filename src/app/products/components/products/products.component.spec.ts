@@ -1,16 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ProductsComponent } from './products.component';
+import { ProductsComponent } from "./products.component";
+import { Store, NgxsModule } from "@ngxs/store";
+import { ProductsState } from "../../../shared/store/products.state";
+import { BasketState } from "../../../shared/store/basket.state";
 
-describe('ProductsComponent', () => {
+describe("ProductsComponent", () => {
   let component: ProductsComponent;
   let fixture: ComponentFixture<ProductsComponent>;
+  let store: Store;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductsComponent ]
-    })
-    .compileComponents();
+      declarations: [ProductsComponent],
+      imports: [NgxsModule.forRoot([ProductsState, BasketState])]
+    }).compileComponents();
+    store = TestBed.get(Store);
   }));
 
   beforeEach(() => {
@@ -19,7 +24,13 @@ describe('ProductsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should load products", () => {
+    store.selectOnce(state => state.productsState).subscribe(products => {
+      expect(products.length).toBeGreaterThan(0);
+    });
   });
 });

@@ -1,22 +1,20 @@
-<div class="app">
-  <div class="app__header">
-    <img src="/assets/img/logo.svg" class="app__logo">
-  </div>
-  <div class="app__content">
-    <div class="app__nav">
-      <a routerLink="products" routerLinkActive="active">Products</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="navbar-brand">Basket SPA</div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="products" routerLinkActive="active">Products</a>
+      <a class="nav-item nav-link" routerLink="basket" routerLinkActive="active">Basket</a>
     </div>
-    <div class="app__container">
-      <router-outlet></router-outlet>
-    </div>
   </div>
+</nav>
+
+<div class="container main-app-content">
+  <router-outlet></router-outlet>
 </div>
-
-<hr>
-
-
-<router-outlet></router-outlet>
-
-<div class="app__footer">
-  <p>Made with ❤ by K.Gkinis</p>
+<div style="text-align: center; color: #fff;" class="bg-primary">
+  Made with ❤ by K.Gkinis
 </div>

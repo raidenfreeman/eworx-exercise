@@ -1,3 +1,4 @@
+import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 import { NgxsModule } from "@ngxs/store";
 import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
 import { BrowserModule } from "@angular/platform-browser";
@@ -16,6 +17,7 @@ import { SharedModule } from "./shared/shared.module";
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot(),
+    NgxsStoragePluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot({
       disabled: environment.production
     }),

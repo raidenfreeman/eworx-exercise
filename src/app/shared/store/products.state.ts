@@ -18,7 +18,7 @@ export class ProductsState {
   constructor(private productsService: ProductsService) {}
 
   @Selector()
-  static products(state: Product[]): Product[] {
+  static getProducts(state: Product[]): Product[] {
     return state;
   }
   // load Products

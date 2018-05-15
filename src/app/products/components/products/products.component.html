@@ -1,8 +1,6 @@
-<h1>INSANITY!!!!!</h1>
+<h1>Products</h1>
 <div class="products">
   <div class="product" *ngFor="let product of products$ | async" (click)="addProduct(product)">
-    <img src="/assets/img/toppings/singles/{{ product.imageURL }}">
-    <h1>{{ product.name }}</h1>
-    <p></p>
+    <app-products-detail [product]="product"></app-products-detail>
   </div>
 </div>

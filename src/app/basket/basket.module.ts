@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { BasketComponent } from "./components/basket/basket.component";
 import { RouterModule, Route } from "@angular/router";
 import { NgxsModule } from "@ngxs/store";
+import { ItemDetailComponent } from './components/item-detail/item-detail.component';
 
 const ROUTES: Route[] = [
   {
@@ -17,6 +18,6 @@ const ROUTES: Route[] = [
     RouterModule.forChild(ROUTES),
     NgxsModule.forFeature([])
   ],
-  declarations: [BasketComponent]
+  declarations: [BasketComponent, ItemDetailComponent]
 })
 export class BasketModule {}

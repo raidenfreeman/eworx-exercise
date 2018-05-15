@@ -13,7 +13,6 @@ import { MatSnackBarModule } from "@angular/material";
 export class SharedModule {
   constructor() {}
   static forRoot(): ModuleWithProviders {
-    console.log("SharedModule.forRoot");
     return {
       ngModule: RootSharedModule
     };

@@ -1,8 +1,16 @@
-<ul class="list-group">
-  <li *ngFor="let item of products$ | async" class="list-group-item d-flex justify-content-between align-items-center">
-    <app-item-detail [product]="item.product"></app-item-detail>
-    <span class="badge badge-primary badge-pill">{{item.quantity}}</span>
-  </li>
-</ul>
-
-Total:{{total$|async}}
+<div class="card" style="width: 25rem;">
+  <div class="card-header">
+    Basket Contents
+  </div>
+  <ul class="list-group">
+    <li *ngFor="let item of gg" class="list-group-item d-flex justify-content-between align-items-center">
+      <app-item-detail [product]="item.product"></app-item-detail>
+      <span class="badge badge-primary badge-pill">{{item.quantity}}</span>
+    </li>
+  </ul>
+  <div class="card-body">
+    <h5 class="card-title">Total</h5>
+    <p class="card-text">{{total|currency:'EUR'}}</p>
+    <button type="button" class="btn btn-primary" (click)="purchase()">Purchase</button>
+  </div>
+</div>

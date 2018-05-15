@@ -1,6 +1,6 @@
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { Product } from "../models/products.model";
-import { AddProduct } from "../../basket/store/basket.actions";
+import { AddProduct, RemoveProduct } from "../../basket/store/basket.actions";
 
 export interface ProductIdQuantityPair {
   [id: string]: number;
@@ -25,6 +25,20 @@ export class BasketState {
     const g = context.getState();
     const id = action.payload;
     g[id] = g[id] + 1 || 1;
+    context.setState(g);
+  }
+
+  @Action(RemoveProduct)
+  removeProduct(
+    context: StateContext<ProductIdQuantityPair>,
+    action: RemoveProduct
+  ) {
+    const g = context.getState();
+    const id = action.payload;
+    g[id] = g[id] - 1 || 0;
+    if (g[id] <= 0) {
+      delete g[id];
+    }
     context.setState(g);
   }
 }

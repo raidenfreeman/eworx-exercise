@@ -6,3 +6,7 @@
 .product {
   margin: 2em;
 }
+
+:host{
+  height: 100%;
+}

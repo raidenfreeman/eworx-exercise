@@ -6,6 +6,10 @@ export class AddProduct {
   constructor(public readonly payload: string) {}
 }
 
+export class RemoveProduct {
+  static readonly type = '[Basket] Remove Product';
+  constructor(public readonly payload: string) {}
+}
 // export class LoadProductsSuccess {
 //   static readonly type = '[Products] Load Products Success';
 

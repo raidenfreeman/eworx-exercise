@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Store, Select } from "@ngxs/store";
 import { LoadProducts } from "../../../products/store/products.actions";
-import { AddProduct } from "../../store/basket.actions";
 import {
   BasketState,
   ProductIdQuantityPair
@@ -23,31 +22,40 @@ export class BasketComponent implements OnInit {
   basketItemIds$: Observable<{ id: string; quantity: number }[]>;
   products$: Observable<{ product: Product; quantity: number }[]>;
 
+  products: Product[];
+  gg;
   total$: Observable<number>;
+
+  total: number;
   ngOnInit() {
     this.store.dispatch(new LoadProducts());
 
-    this.products$ = this.basketItemIds$.pipe(
-      flatMap(x =>
-        this.store.select(state => {
-          const productsInBasket = state.productsState.filter(product =>
-            x.some(y => y.id === product.id)
-          );
-          return productsInBasket.map(y => ({
-            product: y,
-            quantity: x.find(z => z.id === y.id).quantity
-          }));
-        })
-      )
-    );
+    this.store
+      .selectOnce(x => x.productsState)
+      .subscribe(x => (this.products = x));
 
-    this.total$ = this.products$.pipe(
-      map(x =>
-        x.reduce(
-          (accumulator, y) => accumulator + y.quantity * y.product.price,
-          0
-        )
-      )
-    );
+    this.basketItemIds$.subscribe(itemArray => {
+      this.gg = itemArray.map(item => ({
+        product: this.products.find(x => x.id === item.id),
+        quantity: item.quantity
+      }));
+      this.total = this.gg.reduce(
+        (accumulator, y) => accumulator + y.quantity * y.product.price,
+        0
+      );
+    });
+
+    // this.total$ = this.products$.pipe(
+    //   map(x =>
+    //     x.reduce(
+    //       (accumulator, y) => accumulator + y.quantity * y.product.price,
+    //       0
+    //     )
+    //   )
+    // );
+  }
+
+  purchase() {
+    console.log("hello");
   }
 }

@@ -5,10 +5,12 @@ import {
   BasketState,
   ProductIdQuantityPair
 } from "../../../shared/store/basket.state";
-import { Observable } from "rxjs";
-import { map, filter, flatMap } from "rxjs/operators";
+import { Observable, Subscription } from "rxjs";
+import { map, filter, flatMap, take } from "rxjs/operators";
 import { ProductsState } from "../../../shared/store/products.state";
 import { Product } from "../../../shared/models/products.model";
+import { ProductsService } from "../../../shared/services/products/products.service";
+import * as X2JS from "x2js";
 
 @Component({
   selector: "app-basket",
@@ -20,42 +22,41 @@ export class BasketComponent implements OnInit {
 
   @Select(BasketState.getProductQuantityPairs)
   basketItemIds$: Observable<{ id: string; quantity: number }[]>;
-  products$: Observable<{ product: Product; quantity: number }[]>;
-
   products: Product[];
-  gg;
-  total$: Observable<number>;
-
+  productsAndQuantities: { product: Product; quantity: number }[];
   total: number;
+  subscriptions: Subscription[] = [];
   ngOnInit() {
     this.store.dispatch(new LoadProducts());
 
-    this.store
-      .selectOnce(x => x.productsState)
-      .subscribe(x => (this.products = x));
+    this.subscriptions.push(
+      this.store
+        .selectOnce(x => x.productsState)
+        .subscribe(x => (this.products = x))
+    );
 
-    this.basketItemIds$.subscribe(itemArray => {
-      this.gg = itemArray.map(item => ({
-        product: this.products.find(x => x.id === item.id),
-        quantity: item.quantity
-      }));
-      this.total = this.gg.reduce(
-        (accumulator, y) => accumulator + y.quantity * y.product.price,
-        0
-      );
-    });
-
-    // this.total$ = this.products$.pipe(
-    //   map(x =>
-    //     x.reduce(
-    //       (accumulator, y) => accumulator + y.quantity * y.product.price,
-    //       0
-    //     )
-    //   )
-    // );
+    this.subscriptions.push(
+      this.basketItemIds$.subscribe(itemArray => {
+        this.productsAndQuantities = itemArray.map(item => ({
+          product: this.products.find(x => x.id === item.id),
+          quantity: item.quantity
+        }));
+        this.total = this.productsAndQuantities.reduce(
+          (accumulator, y) => accumulator + y.quantity * y.product.price,
+          0
+        );
+      })
+    );
+  }
+  purchase() {
+    var x2js = new X2JS();
+    //The minimum data to represent the basket are the ids and the quantities
+    this.basketItemIds$
+      .pipe(take(1))
+      .subscribe(x => console.log(x2js.js2xml(x)));
   }
 
-  purchase() {
-    console.log("hello");
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

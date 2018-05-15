@@ -11,25 +11,25 @@ export class ProductsService {
       this._subject.next([
         {
           id: "sdfga",
-          imageURL: "",
+          imageURL: "assets/images/charger.jpg",
           name: "Charger",
           price: 3.33
         },
         {
           id: "dg2",
-          imageURL: "",
+          imageURL: "assets/images/cable.jpg",
           name: "Cable",
           price: 1
         },
         {
           id: "dfh34",
-          imageURL: "",
+          imageURL: "assets/images/warranty.png",
           name: "Extended Warranty",
           price: 8
         },
         {
           id: "hsdfh234",
-          imageURL: "",
+          imageURL: "assets/images/pebble.jpg",
           name: "Smart Watch",
           price: 80
         }

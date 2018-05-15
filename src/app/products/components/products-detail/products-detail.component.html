@@ -1,8 +1,8 @@
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 18rem; flex:1 0 auto;">
   <img class="card-img-top" [src]="product.imageURL" [alt]="'Description for '+product.name">
   <div class="card-body">
     <h5 class="card-title">{{product.name}}</h5>
     <p class="card-text">Price:&nbsp;&nbsp;{{product.price|currency :'EUR'}}</p>
-    <button (click)="buy()" class="btn btn-primary">Purchase</button>
+    <button (click)="buy()" class="btn btn-primary">Add to Basket</button>
   </div>
 </div>

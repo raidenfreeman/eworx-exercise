@@ -3,7 +3,7 @@
     Basket Contents
   </div>
   <ul class="list-group">
-    <li *ngFor="let item of gg" class="list-group-item d-flex justify-content-between align-items-center">
+    <li *ngFor="let item of productsAndQuantities" class="list-group-item d-flex justify-content-between align-items-center">
       <app-item-detail [product]="item.product"></app-item-detail>
       <span class="badge badge-primary badge-pill">{{item.quantity}}</span>
     </li>
@@ -11,6 +11,12 @@
   <div class="card-body">
     <h5 class="card-title">Total</h5>
     <p class="card-text">{{total|currency:'EUR'}}</p>
+    <ng-container *ngIf="total>100">
+      <hr>
+      <p>Discount: 10%</p>
+      <h5>New Total</h5>
+      <p class="card-text">{{total*0.9|currency:'EUR'}}</p>
+    </ng-container>
     <button type="button" class="btn btn-primary" (click)="purchase()">Purchase</button>
   </div>
 </div>

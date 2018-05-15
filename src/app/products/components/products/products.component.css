@@ -5,8 +5,10 @@
 
 .product {
   margin: 2em;
+  display: flex;
+  flex-direction: column;
 }
 
-:host{
+:host {
   height: 100%;
 }

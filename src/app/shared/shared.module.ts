@@ -3,11 +3,12 @@ import { CommonModule } from "@angular/common";
 import { NgxsModule } from "@ngxs/store";
 import { ProductsState } from "./store/products.state";
 import { BasketState } from "./store/basket.state";
-
+import { SnackbarManagerComponent } from "./components/snackbar-manager/snackbar-manager.component";
+import { MatSnackBarModule } from "@angular/material";
 @NgModule({
-  imports: [CommonModule],
-  declarations: [],
-  exports: [CommonModule]
+  imports: [CommonModule, MatSnackBarModule],
+  declarations: [SnackbarManagerComponent],
+  exports: [CommonModule, SnackbarManagerComponent]
 })
 export class SharedModule {
   constructor() {}

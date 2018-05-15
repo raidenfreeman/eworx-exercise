@@ -3,6 +3,8 @@
     Basket Contents
   </div>
   <ul class="list-group">
+    <li *ngIf="productsAndQuantities.length ===0" class="list-group-item d-flex justify-content-between align-items-center">
+      Your basket is empty</li>
     <li *ngFor="let item of productsAndQuantities" class="list-group-item d-flex justify-content-between align-items-center">
       <app-item-detail [product]="item.product"></app-item-detail>
       <span class="badge badge-primary badge-pill">{{item.quantity}}</span>

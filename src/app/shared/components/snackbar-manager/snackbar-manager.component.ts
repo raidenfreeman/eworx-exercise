@@ -44,7 +44,8 @@ export class SnackbarManagerComponent implements OnInit {
     setTimeout(() => {
       that.discount$.subscribe(_ =>
         that.snackBarService.open("10% Discount Applied! 🎉", "Ok!", {
-          duration: 2000
+          duration: 2000,
+          verticalPosition: "top"
         })
       );
     }, 20); // This is a hack, I know, I'll go to hell.

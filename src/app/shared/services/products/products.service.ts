@@ -13,7 +13,7 @@ export class ProductsService {
           id: "sdfga",
           imageURL: "assets/images/charger.jpg",
           name: "Charger",
-          price: 3.33
+          price: 10.33
         },
         {
           id: "dg2",
@@ -25,7 +25,7 @@ export class ProductsService {
           id: "dfh34",
           imageURL: "assets/images/warranty.png",
           name: "Extended Warranty",
-          price: 8
+          price: 25.28
         },
         {
           id: "hsdfh234",

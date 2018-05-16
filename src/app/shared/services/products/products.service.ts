@@ -34,7 +34,7 @@ export class ProductsService {
           price: 80
         }
       ]);
-    }, 50);
+    }, 500); // fake delay to emulate XHR
     return this._subject;
   }
 

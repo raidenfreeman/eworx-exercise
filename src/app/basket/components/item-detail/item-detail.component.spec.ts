@@ -1,16 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ItemDetailComponent } from './item-detail.component';
+import { ItemDetailComponent } from "./item-detail.component";
+import { BasketState } from "../../../shared/store/basket.state";
+import { NgxsModule } from "@ngxs/store";
+import { ProductsState } from "../../../shared/store/products.state";
 
-describe('ItemDetailComponent', () => {
+describe("ItemDetailComponent", () => {
   let component: ItemDetailComponent;
   let fixture: ComponentFixture<ItemDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [ItemDetailComponent],
+      imports: [NgxsModule.forRoot([ProductsState, BasketState])]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +22,7 @@ describe('ItemDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

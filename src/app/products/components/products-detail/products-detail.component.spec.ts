@@ -1,16 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ProductsDetailComponent } from './products-detail.component';
+import { ProductsDetailComponent } from "./products-detail.component";
+import { NgxsModule } from "@ngxs/store";
+import { MatSnackBarModule } from "@angular/material";
 
-describe('ProductsDetailComponent', () => {
+describe("ProductsDetailComponent", () => {
   let component: ProductsDetailComponent;
   let fixture: ComponentFixture<ProductsDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductsDetailComponent ]
-    })
-    .compileComponents();
+      declarations: [ProductsDetailComponent],
+      imports: [NgxsModule.forRoot([]), MatSnackBarModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('ProductsDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

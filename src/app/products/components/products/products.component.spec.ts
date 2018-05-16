@@ -4,6 +4,7 @@ import { ProductsComponent } from "./products.component";
 import { Store, NgxsModule } from "@ngxs/store";
 import { ProductsState } from "../../../shared/store/products.state";
 import { BasketState } from "../../../shared/store/basket.state";
+import { ProductsDetailComponent } from "../products-detail/products-detail.component";
 
 describe("ProductsComponent", () => {
   let component: ProductsComponent;
@@ -12,8 +13,8 @@ describe("ProductsComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProductsComponent],
-      imports: [NgxsModule.forRoot([ProductsState, BasketState])]
+      declarations: [ProductsComponent, ProductsDetailComponent],
+      imports: [NgxsModule.forRoot([ProductsState, BasketState])],
     }).compileComponents();
     store = TestBed.get(Store);
   }));
@@ -26,11 +27,5 @@ describe("ProductsComponent", () => {
 
   it("should create", () => {
     expect(component).toBeTruthy();
-  });
-
-  it("should load products", () => {
-    store.selectOnce(state => state.productsState).subscribe(products => {
-      expect(products.length).toBeGreaterThan(0);
-    });
   });
 });

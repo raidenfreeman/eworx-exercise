@@ -1,24 +1,26 @@
-<div class="card" style="width: 25rem;">
-  <div class="card-header">
-    Basket Contents
+<ng-container *ngIf="productsAndQuantities$|async as productQuantityPairs">
+  <div class="card" style="width: 25rem;">
+    <div class="card-header">
+      Basket Contents
+    </div>
+    <ul class="list-group">
+      <li *ngIf="productQuantityPairs.length ===0" class="list-group-item d-flex justify-content-between align-items-center">
+        Your basket is empty</li>
+      <li *ngFor="let item of productQuantityPairs" class="list-group-item d-flex justify-content-between align-items-center">
+        <app-item-detail [product]="item.product"></app-item-detail>
+        <span class="badge badge-primary badge-pill">{{item.quantity}}</span>
+      </li>
+    </ul>
+    <div class="card-body">
+      <h5 class="card-title">Total</h5>
+      <p class="card-text">{{total$|async|currency:'EUR'}}</p>
+      <ng-container *ngIf="(total$|async)>100">
+        <hr>
+        <p>Discount: 10%</p>
+        <h5>New Total</h5>
+        <p class="card-text">{{totalDiscounted$|async|currency:'EUR'}}</p>
+      </ng-container>
+      <button type="button" class="btn btn-primary" (click)="purchase()">Purchase</button>
+    </div>
   </div>
-  <ul class="list-group">
-    <li *ngIf="productsAndQuantities.length ===0" class="list-group-item d-flex justify-content-between align-items-center">
-      Your basket is empty</li>
-    <li *ngFor="let item of productsAndQuantities" class="list-group-item d-flex justify-content-between align-items-center">
-      <app-item-detail [product]="item.product"></app-item-detail>
-      <span class="badge badge-primary badge-pill">{{item.quantity}}</span>
-    </li>
-  </ul>
-  <div class="card-body">
-    <h5 class="card-title">Total</h5>
-    <p class="card-text">{{total|currency:'EUR'}}</p>
-    <ng-container *ngIf="total>100">
-      <hr>
-      <p>Discount: 10%</p>
-      <h5>New Total</h5>
-      <p class="card-text">{{total*0.9|currency:'EUR'}}</p>
-    </ng-container>
-    <button type="button" class="btn btn-primary" (click)="purchase()">Purchase</button>
-  </div>
-</div>
+</ng-container>

@@ -4,9 +4,8 @@ import { NgxsModule } from "@ngxs/store";
 import { ProductsState } from "./store/products.state";
 import { BasketState } from "./store/basket.state";
 import { SnackbarManagerComponent } from "./components/snackbar-manager/snackbar-manager.component";
-import { MatSnackBarModule } from "@angular/material";
 @NgModule({
-  imports: [CommonModule, MatSnackBarModule],
+  imports: [CommonModule],
   declarations: [SnackbarManagerComponent],
   exports: [CommonModule, SnackbarManagerComponent]
 })
